@@ -3,7 +3,7 @@
 
 STR="Best School"
 i=0
-untill ((i == 10)); do
+until ((i == 10)); do
 	echo "$STR"
 	((i++))
 done
