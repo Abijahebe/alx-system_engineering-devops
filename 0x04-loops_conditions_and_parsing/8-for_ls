@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# display the content of the current directory
+
+contents=$("ls")
+for line in $contents; do
+	echo "$line" | cut -d'-' -f2
+done
