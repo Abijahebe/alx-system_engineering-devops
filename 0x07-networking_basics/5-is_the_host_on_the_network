@@ -1,5 +1,5 @@
 #!/usr/bin/env bassh
-#pings an IP address passed as an arg
+# pings an IP address passed as an arg
 
 if (( $# > 0 )); then
 	ping -c 5 "$1"
