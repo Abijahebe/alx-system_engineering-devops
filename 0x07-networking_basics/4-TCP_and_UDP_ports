@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-
 #displays listening ports
-netsat -lp
+
+netstat -lp
