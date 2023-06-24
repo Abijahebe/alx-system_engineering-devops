@@ -4,9 +4,9 @@ $config = 'PasswordAuthentication no'
 $attr = 'PasswordAuthentication'
 $id = 'IdentifyFile ~/.ssh/school'
 exec { 'Turn off passwd auth':
-   command => "/usr/bin/sed -i '/${attr}/c ${config}' /etc/ssh/ssh_config",
+  command => "/usr/bin/sed -i '/${attr}/c ${config}' /etc/ssh/ssh_config",
 }
 
 exec { 'Declare identity file':
-   command => "/usr/bin/sed -i '/IdentityFile/c ${id} /etc/ssh/ssh_config",
+  command => "/usr/bin/sed -i '/IdentityFile/c ${id} /etc/ssh/ssh_config",
 }
