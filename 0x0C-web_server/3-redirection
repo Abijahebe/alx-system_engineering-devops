@@ -7,7 +7,7 @@ conf="server_name\ _;\nrewrite ^/redirect_me/?$ $location permanent;"
 
 apt update
 apt install -y nginx
-ufx allow 'Nginx HTTP'
+ufw allow 'Nginx HTTP'
 echo "Hello World!" > /var/www/html/index.html
 
 sed -i "s|server_name\ _;|$conf|" /etc/nginx/sites-available/default
