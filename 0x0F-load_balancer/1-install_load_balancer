@@ -8,7 +8,7 @@
 sudo apt update
 
 # Add HAProxy PPA
-sud apt install -y software-properties-common
+sudo apt install -y software-properties-common
 sudo add-apt-repository ppa:vbernat/haproxy-1.8 -y
 sudo apt update
 
