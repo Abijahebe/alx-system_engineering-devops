@@ -1,28 +1,26 @@
 #!/usr/bin/env bash
-# Script audits domains and subdomains to check their DNS type
+# Bash script that will display information about subdomains.
+function domain_check {
+	domain_names=("www" "lb-01" "web-01" "web-02")
 
-sub="$2"
-
-audit_domain() {
-	record=$(dig "$1" | grep -A1 'ANSWER SECTION:' | tail -n 1)
-	
-	echo "$record" |
-		awk -v subd="$sub" '{print "The subdomain", subd, "is a", $4, "record and points to", $5)'
-	return
-}
-
-audit_subs() {
-	subdomains=(www lb-01 web-01 web02)
-	
-	for sub in "${subdomains[@]}"; do
-		host="$sub.$1"
-		audit_domain "$host"
+	for i in "${domain_names[@]}";
+	do
+		dig "${i}"."$1" | grep -A1 'ANSWER SECTION:' | \
+		awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$i"
 	done
-	return
 }
 
-if [ "$1" ] && [ "$2" ]; then
-	audit_domain "$2.$1"
-elif [ "$1" ]; then
-	audit_subs "$1"
+function subdomain_check {
+	dig "${2}"."$1" | grep -A1 'ANSWER SECTION:' | \
+	awk 'FNR == 2 {printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$2"
+}
+
+if [ $# -lt 1 ]
+then
+	echo "*** Provide domain name ***"
+elif [ $# -eq 1 ]
+then
+	domain_check "$1";
+else
+	subdomain_check "$1" "$2"
 fi
